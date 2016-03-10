@@ -1,16 +1,23 @@
 define([
-	'backbone'
-], function (Backbone) {
+	'backbone',
+	'models/productCollection'
+], function (Backbone, ProductCollection) {
 	var ListingModel = Backbone.Model.extend({
+		url: 'listings',
 		defaults: {
-			itemName: "",
-			description: "",
-			items: null
+			title: '',
+			description: '',
+			products: null
+		},
+		initialize: function () {
+			this.set({
+				products: new ProductCollection()
+			});
 		},
 		parse: function (obj) {
 			var attrs = obj;
 
-			attrs.items = new models.ItemCollection(obj.items)
+			attrs.products = new ProductCollection(obj.items)
 
 			return attrs;
 		}

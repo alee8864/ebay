@@ -1,15 +1,22 @@
-application.module('Listing', function (mod, app, bb, m, $, _) {
+define([
+	'application',
+	'modules/listing/listing.controller'
+], function (App, ListingController) {
+	App.module('Listing', function (Listing, App, Backbone, Marionette, $, _) {
 
-	mod.Router = Marionette.AppRouter.extend({
-		appRoutes: {
-			'listing/(:listing)': 'show'
-		}
-	});
-
-	app.addInitializer(function() {
-		new mod.Router({
-			controller: new mod.Controller()
+		Listing.Router = Marionette.AppRouter.extend({
+			appRoutes: {
+				'listing/(:listing)': 'show'
+			}
 		});
+
+		App.addInitializer(function() {
+			new Listing.Router({
+				controller: new ListingController()
+			});
+		});
+
 	});
 
+	return App.Listing;
 });

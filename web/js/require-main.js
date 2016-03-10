@@ -38,7 +38,8 @@ require.config({
 require([
 	'application',
 	'underscore',
-	'modules/main/main'
+	'modules/main/main',
+	'modules/listing/listing'
 ], function (Application, _) {
 
 	_.templateSettings = {

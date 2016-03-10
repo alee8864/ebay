@@ -42,6 +42,33 @@
 			border: 1px solid #aaa;
 		}
 
+				.width100 {
+			width: 100%;
+		}
+
+		.item {
+			padding-bottom: 25px;
+		}
+
+		.itemTitle {
+			height: 40px;
+		}
+
+		.section {
+			margin-bottom: 25px;
+		}
+
+		.padH20 {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		.bordered {
+			border: 1px solid #ccc;
+  			padding: 10px 20px 10px 20px;
+  			margin-bottom: 10px;
+		}
+
 	</style>
 </head>
 <body>
@@ -128,12 +155,12 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="col-xs-2 text-right">Header</label>
-					<input class="col-xs-5" type="text">
+					<input id="listing-header" class="col-xs-5" type="text">
 				</div>
 
 				<div class="form-group">
 					<label class="col-xs-2 text-right">Description</label>
-					<input class="col-xs-5" type="textarea">
+					<input id="listing-description" class="col-xs-5" type="textarea">
 				</div>
 
 				<div class="js-product-container form-group"></div>
@@ -146,5 +173,60 @@
 			</form>
 		</div>
 	</script>
+
+
+
+	<script type="text/template" id="tpl-listing-layout">
+		<div class="header-section-container"></div>
+		<div class="item-description-section-container"></div>
+		<div class="item-collection-container"></div>
+		<div class="shipping-container"></div>
+		<div class="disclaimer-section-container"></div>
+	</script>
+
+	<script type="text/template" id="tpl-section">
+		<div class="col-xs-12 section-header">
+			<h4>{{- header }}</h4>
+		</div>
+		<div class="col-xs-12 section-content"></div>
+	</script>
+
+	<script type="text/template" id="tpl-listing-header">
+		<div class="col-xs-12">
+			<h1 class="page-header">{{- itemName }}</h1>
+			<div class="lead">{{- description }}</div>
+		</div>
+	</script>
+
+	<script type="text/template" id="tpl-shipping">
+		<ul class="list-group">
+			<li class="list-group-item">All items come bagged and boarded.</li>
+			<li class="list-group-item"><a href="http://imgur.com/a/tX3n3" target="blank">Example of Mailing Process</a></li>
+			<li class="list-group-item">Feel free to browse <a href="http://www.ebay.com/sch/how_bout_some_comics/m.html">my other items</a>. All items can be combined for a set $5.00 shipping fee.</li>
+		</ul>
+	</script>
+
+	<script type="text/template" id="tpl-disclaimer">
+		<div>
+			If you have any questions regarding the items, please, feel free to ask and I'll answer as best as I can.
+		</div>
+		<div style="margin-top:25px;">
+			Thanks for looking!
+		</div>	
+	</script>
+
+	<script type="text/template" id="tpl-item">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="itemTitle panel-title">{{- itemNumber }}) {{- title }}</h3>
+			</div>
+			<div class="panel-body"> 
+				<a class="col-xs-12" href="{{- imgLink }}">
+					<img class="block width100" src="{{- thumbnail }}" title="{{- title }}" />
+				</a>
+			</div>
+		</div>
+	</script>
+
 </body>
 </html>

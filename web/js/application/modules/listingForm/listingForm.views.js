@@ -68,9 +68,6 @@ define([
 			childEvents: {
 				'add': 'addProduct'
 			},
-			initialize: function () {
-				this.collection = new ProductCollection();
-			},
 			getChildView: function (model) {
 				return model.get("edit") ? Views.ProductEditView : Views.ProductView;
 			},
@@ -96,13 +93,32 @@ define([
 			template: '#tpl-listing-form-form',
 			className: 'row',
 			ui: {
-				'productContainer': '.js-product-container'
+				'productContainer': '.js-product-container',
+				'headerInput': '#listing-header',
+				'descriptionInput': '#listing-description'
+			},
+			events: {
+				'change input': 'handleInputChange',
+				'submit': 'handleSubmit'
 			},
 			initialize: function () {
-				this.productListView = new Views.ProductListView();
+				this.productListView = new Views.ProductListView({
+					collection: this.model.get("products")
+				});
 			},
 			onRender: function () {
 				this.ui.productContainer.append(this.productListView.render().el);
+			},
+			handleInputChange: function () {
+				this.model.set({
+					title: this.ui.headerInput.val(),
+					description: this.ui.descriptionInput.val()
+				});
+			},
+			handleSubmit: function (evt) {
+				evt.preventDefault();
+
+				this.model.save();
 			}
 
 		});

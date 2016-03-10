@@ -1,38 +1,45 @@
-var bb = Backbone;
 
-models = {};
+define([
+	'backbone'
+], function (Backbone) {
 
-models.ItemModel = bb.Model.extend({
-	defaults: {
-		title: "",
-		thumbnail: "",
-		imgLink: ""
-	}
-});
+	var models = {};
 
-models.ItemCollection = bb.Collection.extend({
-	model: models.ItemModel
-});
+	models.ItemModel = Backbone.Model.extend({
+		defaults: {
+			title: "",
+			thumbnail: "",
+			imgLink: ""
+		}
+	});
 
-models.ListingModel = bb.Model.extend({
-	defaults: {
-		itemName: "",
-		description: "",
-		items: null
-	},
-	parse: function (obj) {
-		var attrs = obj;
+	models.ItemCollection = Backbone.Collection.extend({
+		model: models.ItemModel
+	});
 
-		attrs.items = new models.ItemCollection(obj.items)
+	models.ListingModel = Backbone.Model.extend({
+		defaults: {
+			itemName: "",
+			description: "",
+			items: null
+		},
+		parse: function (obj) {
+			var attrs = obj;
 
-		return attrs;
-	}
-});
+			attrs.items = new models.ItemCollection(obj.items)
 
-models.SectionModel = bb.Model.extend({
-	defaults: {
-		header: "",
-		view: null,
-		viewModel: null
-	}
+			return attrs;
+		}
+	});
+
+	models.SectionModel = Backbone.Model.extend({
+		defaults: {
+			header: "",
+			view: null,
+			viewModel: null
+		}
+	});
+
+
+	return models;
 });
