@@ -2,15 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Listing = new Schema({
-	_id: 
 	title: String,
 	description: String,
-	products: [
-		title: '',
-		description: '',
-		image_link: ''
-	]
+	products: [{
+		title: String,
+		description: String,
+		image_link: String
+	}]
 });
 
-mongoose.model('Listing', Listing);
-mongoose.connect('mongodb://localhost/listing');
+var Listing = mongoose.model('Listing', Listing);
+
+module.exports = Listing;

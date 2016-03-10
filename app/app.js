@@ -3,7 +3,16 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
-// var Listing = require('models/Listing');
+var Listing = require('./models/Listing');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+mongoose.connect('mongodb://localhost/listingGenerator');
+
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to mongodb://localhost/listingGenerator');
+}); 
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -35,6 +44,22 @@ app.get('/listings', function (req, res, next) {
 	});
 });
 
+app.post('/listings', function (req, res, next) {
+	var listing = new Listing(req.body);
+	listing.save(function (err, saved) {
+		if (err) throw err;
+
+		res.json(saved);
+	});
+});
+
+app.get('/all', function (req, res, next) {
+	Listing.find([], function (err, listings) {
+		console.log(listings);
+
+		res.json(listings);
+	});
+});
 
 app.use(express.static(path.join(__dirname, '../web')));
 

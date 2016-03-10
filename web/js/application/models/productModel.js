@@ -5,7 +5,7 @@ define([
 		defaults: {
 			title: '',
 			description: '',
-			imageLink: ''
+			image_link: ''
 		}
 	});
 

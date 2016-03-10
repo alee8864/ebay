@@ -30,13 +30,13 @@ define([
 			},
 			onRender: function () {
 				this.$el.toggleClass('even', this.index % 2 === 0)
-				this.ui.image.toggle(this.model.get('imageLink') !== '');
+				this.ui.image.toggle(this.model.get('image_link') !== '');
 			},
 			handleInputChange: function () {
 				this.model.set({
 					title: this.ui.title.val(),
 					description: this.ui.description.val(),
-					imageLink: this.ui.imageLink.val()
+					image_link: this.ui.imageLink.val()
 				});
 			}
 		});
