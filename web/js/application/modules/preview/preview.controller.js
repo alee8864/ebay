@@ -1,26 +1,19 @@
 define([
 	'application',
 	'models/listingModel',
-	'modules/listing/listing.views',
+	'modules/preview/preview.views',
 	"models/models"
 ], function (App, ListingModel, ListingViews, models) {
 
-	App.module('Listing', function (Listing, App, Backbone, Marionette, $, _) {
-		Listing.Controller = Marionette.Controller.extend({
-			show: function () {
-				var listingModel = new ListingModel();
+	App.module('Preview', function (Preview, App, Backbone, Marionette, $, _) {
+		Preview.Controller = Marionette.Controller.extend({
+			getLayoutView: function (listingModel) {
 				var layout = new ListingViews.Layout({
 					 model: listingModel
 				});
 
-				listingModel.fetch({
-					success: function () {
-						App.mainRegion.show(layout);
-					}
-				});
 
-
-				layout.on('show', function () {
+				layout.on('render', function () {
 					var headerView = new ListingViews.Section({
 						model: new models.SectionModel({
 							view: ListingViews.ListingHeader,
@@ -29,7 +22,7 @@ define([
 					});
 
 					var itemSectionViewModel = new Backbone.Model({
-						collection: new models.ItemCollection(listingModel.get("items"))
+						collection: listingModel.get("products")
 					});
 
 					var collectionView = new ListingViews.Section({
@@ -60,12 +53,18 @@ define([
 					layout.disclaimerRegion.show(disclaimerView);
 				});
 
+				return layout;
+			},
+
+			show: function () {
+				var listingModel = new ListingModel();
 				
+				this.getLayoutView(listingModel);
 			}
 		});
 
 	});
 
 
-	return App.Listing.Controller;
+	return App.Preview.Controller;
 });

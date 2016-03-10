@@ -3,6 +3,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 	<style>
+		body {
+			background-color: #eef3ef;			
+		}
+
+		.main {
+			margin-top: 60px;
+		}
+
 		.u-width-100 {
 			width: 100%;
 		}
@@ -42,7 +50,7 @@
 			border: 1px solid #aaa;
 		}
 
-				.width100 {
+		.width100 {
 			width: 100%;
 		}
 
@@ -69,10 +77,17 @@
   			margin-bottom: 10px;
 		}
 
+		.tab-content {
+			background-color: #fff;
+
+    		border: 1px solid #ddd;
+			border-top-color: transparent;
+		}
+
 	</style>
 </head>
 <body>
-	<div class="container js-region-main"></div>
+	<div class="container js-region-main main"></div>
 
 	<script data-main="js/require-main" src="js/vendor/require.js"></script>
 
@@ -90,7 +105,7 @@
 		</div>
 
 		<div class="col-xs-2">
-			<img src="{{= thumbnail }}">
+			<img src="{{= image_link }}">
 		</div>
 		<div class="col-xs-2">
 			<button class="js-btn-edit btn btn-default" type="button">Edit</button>
@@ -100,30 +115,30 @@
 
 	<script type="text/template" id="tpl-listting-form-product-create">
 		<div class="row u-pad-v-20">
-			<div class="col-xs-8">
+			<div class="col-sm-8 col-sm-offset-1">
 				<div class="form-group">
-					<label for="new-product-title" class="col-xs-3 text-right">Title</label>
-					<input id="new-product-title" class="col-xs-8" type="text" placeholder="Ener title" value="{{-title}}">
+					<label for="new-product-title" class="col-sm-4 text-right">Title</label>
+					<input id="new-product-title" class="col-sm-8" type="text" placeholder="Ener title" value="{{-title}}">
 				</div>
 
 				<div class="form-group">
-					<label for="new-product-description" class="col-xs-3 text-right">Description</label>
-					<input id="new-product-description" class="col-xs-8" type="text" placeholder="Enter description" value={{-description}}>
+					<label for="new-product-description" class="col-sm-4 text-right">Description</label>
+					<input id="new-product-description" class="col-sm-8" type="text" placeholder="Enter description" value={{-description}}>
 				</div>
 
 				<div class="form-group">
-					<label for="new-product-image-link" class="col-xs-3 text-right">Image Link</label>
-					<input id="new-product-image-link" class="col-xs-8" type="text" placeholder="Enter Image Link" value="{{-image_link}}">
+					<label for="new-product-image-link" class="col-sm-4 text-right">Image Link</label>
+					<input id="new-product-image-link" class="col-sm-8" type="text" placeholder="Enter Image Link" value="{{-image_link}}">
 				</div>
 			</div>
 
-			<div class="col-xs-2">
+			<div class="col-sm-2">
 				<img class="js-product-image product-image" src="{{-image_link}}">
 			</div>
 
-			<div class="col-xs-2">
+			<!-- <div class="col-xs-2">
 				<button class="js-btn-add btn btn-default"  type="button">Add</button>
-			</div>
+			</div> -->
 		</div>
 		
 	</script>
@@ -148,7 +163,7 @@
 	<script type="text/template" id="tpl-listing-form-form">
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="row">
-				<h3 class="col-xs-12">Create Listing</h3>
+				<h2 class="col-xs-12">Create Listing</h2>
 			</div>
 
 			
@@ -175,13 +190,14 @@
 	</script>
 
 
-
 	<script type="text/template" id="tpl-listing-layout">
-		<div class="header-section-container"></div>
-		<div class="item-description-section-container"></div>
-		<div class="item-collection-container"></div>
-		<div class="shipping-container"></div>
-		<div class="disclaimer-section-container"></div>
+		<div class="col-xs-10 col-xs-offset-1">
+			<div class="header-section-container"></div>
+			<div class="item-description-section-container"></div>
+			<div class="item-collection-container"></div>
+			<div class="shipping-container"></div>
+			<div class="disclaimer-section-container"></div>
+		</div>
 	</script>
 
 	<script type="text/template" id="tpl-section">
@@ -193,7 +209,7 @@
 
 	<script type="text/template" id="tpl-listing-header">
 		<div class="col-xs-12">
-			<h1 class="page-header">{{- itemName }}</h1>
+			<h1 class="page-header">{{- title }}</h1>
 			<div class="lead">{{- description }}</div>
 		</div>
 	</script>
@@ -221,11 +237,37 @@
 				<h3 class="itemTitle panel-title">{{- itemNumber }}) {{- title }}</h3>
 			</div>
 			<div class="panel-body"> 
-				<a class="col-xs-12" href="{{- imgLink }}">
-					<img class="block width100" src="{{- thumbnail }}" title="{{- title }}" />
+				<a class="col-xs-12" href="{{- image_link }}">
+					<img class="block width100" src="{{- image_link }}" title="{{- title }}" />
 				</a>
 			</div>
 		</div>
+	</script>
+
+	<script type="text/template" id="tpl-tab-wrapper">
+		<ul class="nav nav-tabs" role="tablist"></ul>
+		<div class="tab-content"></div>
+	</script>
+
+	<script type="text/template" id="tpl-tab-view">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#listing-form" role="tab" data-toggle="tab">Listing Creation Form</a>
+			</li>
+			<li role="presentation">
+				<a href="#listing-preview" role="tab" data-toggle="tab">Preview</a>
+			</li>
+			<li role="presentation">
+				<a href="#listing-code" role="tab" data-toggle="tab">Code</a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="listing-form" role="tabpanel" class="tab-pane active"></div>
+			<div id="listing-preview" role="tabpanel" class="tab-pane"></div>
+			<div id="listing-code" role="tabpanel" class="tab-pane"></div>
+		</div>
+
 	</script>
 
 </body>

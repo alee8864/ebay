@@ -1,17 +1,21 @@
 define([
 	'application'
 ], function (App) {
-	App.module('Listing', function (Listing, App, Backbone, Marionette, $, _) {
-		var Views = Listing.Views = {};
+	App.module('Preview', function (Preview, App, Backbone, Marionette, $, _) {
+		var Views = Preview.Views = {};
 
 		Views.Layout = Marionette.LayoutView.extend({
 			template: '#tpl-listing-layout',
+			className: 'row',
 			regions: {
 				headerRegion: ".header-section-container",
 				descriptionRegion: ".item-description-section-container",
 				itemRegion: ".item-collection-container",
 				shippingRegion: ".shipping-container",
 				disclaimerRegion: ".disclaimer-section-container"
+			},
+			modelEvents: {
+				'change': 'render'
 			}
 		});
 
@@ -72,5 +76,5 @@ define([
 		});
 	});
 
-	return App.Listing.Views;
+	return App.Preview.Views;
 });

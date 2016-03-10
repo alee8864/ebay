@@ -6,6 +6,7 @@ require.config({
 		'underscore': 'vendor/underscore-min',
 		'backbone':   'vendor/backbone-min',
 		'marionette': 'vendor/backbone.marionette',
+		'bootstrap': 'vendor/bootstrap.min',
 		'application': 'application/application',
 		'modules': 'application/modules',
 		'templates': 'application/templates',
@@ -38,8 +39,9 @@ require.config({
 require([
 	'application',
 	'underscore',
+	'bootstrap',
 	'modules/main/main',
-	'modules/listing/listing'
+	'modules/preview/preview'
 ], function (Application, _) {
 
 	_.templateSettings = {

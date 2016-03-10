@@ -2,22 +2,35 @@ define([
 	'application',
 	'models/listingModel',
 	'modules/main/main.views',
-	'modules/listingForm/listingForm.views'
-], function (App, ListingModel, MainViews, listingFormViews) {
+	'modules/listingForm/listingForm.views',
+	'modules/preview/preview.controller'
+], function (App, ListingModel, MainViews, ListingFormViews, PreviewController) {
 	App.module('Main', function (Main, App, Backbone, Marionette, $, _) {
 		Main.Controller = Marionette.Controller.extend({
 			show: function () {
+				var previewController = new PreviewController();
+				var listingModel = new ListingModel();
+				var tabLayout = new MainViews.TabView();
 				var pageLayout = new MainViews.PageLayout();
 
-				pageLayout.on('show', function () {
-					var listingModel = new ListingModel();
-					var form = new listingFormViews.FormItemView({
+
+				tabLayout.on('show', function () {
+					
+					var formView = new ListingFormViews.FormItemView({
 						model: listingModel
 					});
-					pageLayout.formRegion.show(form);
+
+					var previewView = previewController.getLayoutView(listingModel);
+
+					previewView.listenTo(previewView.model, 'change', function () {
+						tabLayout.listingPreviewRegion.show(previewView);
+					});
+
+					tabLayout.listingFormRegion.show(formView);
+					tabLayout.listingPreviewRegion.show(previewView);
 				});
 
-				App.mainRegion.show(pageLayout);
+				App.mainRegion.show(tabLayout);
 			}
 		});
 	});

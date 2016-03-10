@@ -38,6 +38,8 @@ define([
 					description: this.ui.description.val(),
 					image_link: this.ui.imageLink.val()
 				});
+
+				this.trigger('modelChange');
 			}
 		});
 
@@ -66,25 +68,24 @@ define([
 				'click .js-add-product': 'handleAddProductClick'
 			},
 			childEvents: {
-				'add': 'addProduct'
+				'modelChange': 'childModelChange'
 			},
-			getChildView: function (model) {
-				return model.get("edit") ? Views.ProductEditView : Views.ProductView;
-			},
+			childView: Views.ProductEditView,
 			childViewOptions: function(model, index) {
 				return {
 					index: index
 				};
 			},
+			initialize: function () {
+				this.model = this.options.model;
+			},
 			handleAddProductClick: function () {
-				var productModel = new ProductModel({
-					edit: true
-				});
+				var productModel = new ProductModel();
 
 				this.collection.add(productModel);
 			},
-			addProduct: function () {
-				this.render();
+			childModelChange: function () {
+				this.model.trigger('change');
 			}
 		});
 
@@ -103,6 +104,7 @@ define([
 			},
 			initialize: function () {
 				this.productListView = new Views.ProductListView({
+					model: this.model,
 					collection: this.model.get("products")
 				});
 			},
