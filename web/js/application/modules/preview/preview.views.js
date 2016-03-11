@@ -4,9 +4,57 @@ define([
 	App.module('Preview', function (Preview, App, Backbone, Marionette, $, _) {
 		var Views = Preview.Views = {};
 
+		/**
+		*  The view being used as the template for the copying of the html.
+		*  Includes the styles needed for the markup to render correctly
+		**/
+		Views.FullPage = Marionette.ItemView.extend({
+			template: '#tpl-template',
+			ui: {
+				content: '.js-content'
+			}
+		});
+
+
+		/**
+		*	View that shows the preview and handles the copy
+		**/
+		Views.TabView = Marionette.LayoutView.extend({
+			template: '#tpl-listing',
+			className: 'row u-pad-v-20',
+			events: {
+				'click .js-copy-button': 'handleCopyClick'
+			},
+			ui: {
+				copyTextarea: '.js-copy-textarea'
+			},
+			regions: {
+				listingContainer: '.js-listing-container'
+			},
+			// the copy mechanism to is to have textarea that is not visible, and copy the contets
+			handleCopyClick: function () {
+				// create the full view and add in the preview
+				var fullPage = new Views.FullPage();
+				var listing = this.listingContainer.currentView.el.cloneNode(true);
+				fullPage.render();
+				fullPage.ui.content.append(listing.outerHTML);
+				
+				// update te contents of teh textarea and select everything within it
+				this.ui.copyTextarea.val(fullPage.el.outerHTML);
+				this.ui.copyTextarea.select();
+
+				// attempt to copy the selection
+				document.execCommand('copy');
+
+				// clean up
+				fullPage.destroy();
+				this.ui.copyTextarea.val('');
+			}
+		});
+
 		Views.Layout = Marionette.LayoutView.extend({
 			template: '#tpl-listing-layout',
-			className: 'row',
+			className: 'row bordered',
 			regions: {
 				headerRegion: ".header-section-container",
 				descriptionRegion: ".item-description-section-container",

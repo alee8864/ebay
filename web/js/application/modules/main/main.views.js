@@ -12,27 +12,6 @@ define([
 			}
 		});
 
-		Views.TabListItemView = Marionette.ItemView.extend({
-
-		});
-
-		Views.TabListCollectionView = Marionette.CollectionView.extend({
-			tagName: 'ul',
-			className: 'nav nav-tabs',
-			attributes: {
-				role: 'tablist'
-			},
-			childView: Views.TabListItemView
-		});
-
-		Views.TabContentItemView = Marionette.ItemView.extend({
-
-		});
-
-		Views.TabContentCollectionView = Marionette.CollectionView.extend({
-			className: 'tab-content',
-			childView: Views.TabContentItemView
-		});
 
 		Views.TabWrapper = Marionette.ItemView.extend({
 			template: false,
@@ -56,7 +35,8 @@ define([
 			template: '#tpl-tab-view',
 			regions: {
 				listingFormRegion: '#listing-form',
-				listingPreviewRegion: '#listing-preview'
+				listingPreviewRegion: '#listing-preview',
+				listingCodeRegion: '#listing-code'
 			}
 		});
 

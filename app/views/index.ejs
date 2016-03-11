@@ -1,147 +1,52 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
-	<style>
-		body {
-			background-color: #eef3ef;			
-		}
-
-		.main {
-			margin-top: 60px;
-		}
-
-		.u-width-100 {
-			width: 100%;
-		}
-
-		.u-pad-v-20 {
-			padding-top: 20px;
-			padding-bottom: 20px;
-		}
-
-		.u-margin-t-20 {
-			margin-top: 20px;
-		}
-
-		.product-image {
-			width: 100%;
-			max-height: 200px;
-		}
-
-		.listing-form-container {
-			background-color: #f6f6fe;
-		}
-
-		.listing-form-empty {
-			padding: 20px;
-		}
-
-		.product {
-			background-color: #d4d4e4;
-			border: 1px solid #aaa;
-		}
-
-		.product.even {
-			background-color: #e0e0f0;
-		}
-
-		.products-container {
-			border: 1px solid #aaa;
-		}
-
-		.width100 {
-			width: 100%;
-		}
-
-		.item {
-			padding-bottom: 25px;
-		}
-
-		.itemTitle {
-			height: 40px;
-		}
-
-		.section {
-			margin-bottom: 25px;
-		}
-
-		.padH20 {
-			padding-left: 20px;
-			padding-right: 20px;
-		}
-
-		.bordered {
-			border: 1px solid #ccc;
-  			padding: 10px 20px 10px 20px;
-  			margin-bottom: 10px;
-		}
-
-		.tab-content {
-			background-color: #fff;
-
-    		border: 1px solid #ddd;
-			border-top-color: transparent;
-		}
-
-	</style>
+	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<div class="container js-region-main main"></div>
 
 	<script data-main="js/require-main" src="js/vendor/require.js"></script>
 
+
 	<script type="text/template" id="tpl-main-page-layout">
 		<div class="js-listing-form-container listing-form-container"></div>
 		<div class="js-output-container"></div>
 	</script>
 
-	<script type="text/template" id="tpl-listng-form-product-list-item">
-		<div class="col-xs-8">
-			<div class="row">
-				<div>{{- title }}</div>
-				<div>{{- description }}</div>
-			</div>
-		</div>
-
-		<div class="col-xs-2">
-			<img src="{{= image_link }}">
-		</div>
-		<div class="col-xs-2">
-			<button class="js-btn-edit btn btn-default" type="button">Edit</button>
-			<button class="js-btn-remove btn btn-default" type="button">Remove</button>
-		</div>
-	</script>
 
 	<script type="text/template" id="tpl-listting-form-product-create">
 		<div class="row u-pad-v-20">
-			<div class="col-sm-8 col-sm-offset-1">
+			<div class="col-sm-9">
+				
 				<div class="form-group">
-					<label for="new-product-title" class="col-sm-4 text-right">Title</label>
-					<input id="new-product-title" class="col-sm-8" type="text" placeholder="Ener title" value="{{-title}}">
+					<label for="new-product-title" class="col-sm-4 control-label">Title</label>
+					<div class="col-sm-8">
+						<input id="new-product-title" class="form-control" type="text" placeholder="Ener title" value="{{-title}}">
+					</div>					
 				</div>
 
 				<div class="form-group">
-					<label for="new-product-description" class="col-sm-4 text-right">Description</label>
-					<input id="new-product-description" class="col-sm-8" type="text" placeholder="Enter description" value={{-description}}>
+					<label for="new-product-description" class="col-sm-4 control-label">Description</label>
+					<div class="col-sm-8">
+						<input id="new-product-description" class="form-control" type="text" placeholder="Enter description" value={{-description}}>
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="new-product-image-link" class="col-sm-4 text-right">Image Link</label>
-					<input id="new-product-image-link" class="col-sm-8" type="text" placeholder="Enter Image Link" value="{{-image_link}}">
+					<label for="new-product-image-link" class="col-sm-4 control-label">Image Link</label>
+					<div class="col-sm-8">
+						<input id="new-product-image-link" class="form-control" type="text" placeholder="Enter Image Link" value="{{-image_link}}">
+					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-2">
 				<img class="js-product-image product-image" src="{{-image_link}}">
 			</div>
-
-			<!-- <div class="col-xs-2">
-				<button class="js-btn-add btn btn-default"  type="button">Add</button>
-			</div> -->
-		</div>
-		
+		</div>		
 	</script>
+
 
 	<script type="text/template" id="tpl-listing-form-product-list">
 		<div class="row">
@@ -155,34 +60,36 @@
 			<div class="col-xs-12 ">
 				<button class="js-add-product btn btn-default u-margin-t-20 pull-right" type="button">Add Product</button>
 			</div>
-		</div>
-		
-		
+		</div>		
 	</script>
+
 
 	<script type="text/template" id="tpl-listing-form-form">
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="row">
 				<h2 class="col-xs-12">Create Listing</h2>
 			</div>
-
 			
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label class="col-xs-2 text-right">Header</label>
-					<input id="listing-header" class="col-xs-5" type="text">
+					<label class="col-sm-3 control-label">Header</label>
+					<div class="col-sm-7">
+						<input id="listing-header" class="form-control" type="text" placeholder="Enter listing title">
+					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-xs-2 text-right">Description</label>
-					<input id="listing-description" class="col-xs-5" type="textarea">
+					<label class="col-sm-3 control-label">Description</label>
+					<div class="col-sm-7">
+						<input id="listing-description" class="form-control" type="text" placeholder="Enter listing description">
+					</div>
 				</div>
 
 				<div class="js-product-container form-group"></div>
 
 				<div class="form-group">
 					<div class="col-xs-12">
-						<button class="btn btn-primary" type="submit">Create Listing</button>
+						<button class="btn btn-primary" type="submit">Save Listing</button>
 					</div>
 				</div>
 			</form>
@@ -191,7 +98,7 @@
 
 
 	<script type="text/template" id="tpl-listing-layout">
-		<div class="col-xs-10 col-xs-offset-1">
+		<div class="">
 			<div class="header-section-container"></div>
 			<div class="item-description-section-container"></div>
 			<div class="item-collection-container"></div>
@@ -200,12 +107,14 @@
 		</div>
 	</script>
 
+
 	<script type="text/template" id="tpl-section">
 		<div class="col-xs-12 section-header">
 			<h4>{{- header }}</h4>
 		</div>
 		<div class="col-xs-12 section-content"></div>
 	</script>
+
 
 	<script type="text/template" id="tpl-listing-header">
 		<div class="col-xs-12">
@@ -214,6 +123,16 @@
 		</div>
 	</script>
 
+
+	<script type="text/template" id="tpl-listing">
+		<div class="js-listing-container col-xs-10 col-xs-offset-1"></div>
+		<div class="col-xs-11">
+			<button class="js-copy-button btn btn-default pull-right" type="button">Copy HTML</button>
+		</div>
+		<textarea class="js-copy-textarea copy-textarea"></textarea>
+	</script>
+
+
 	<script type="text/template" id="tpl-shipping">
 		<ul class="list-group">
 			<li class="list-group-item">All items come bagged and boarded.</li>
@@ -221,6 +140,7 @@
 			<li class="list-group-item">Feel free to browse <a href="http://www.ebay.com/sch/how_bout_some_comics/m.html">my other items</a>. All items can be combined for a set $5.00 shipping fee.</li>
 		</ul>
 	</script>
+
 
 	<script type="text/template" id="tpl-disclaimer">
 		<div>
@@ -231,23 +151,27 @@
 		</div>	
 	</script>
 
+
 	<script type="text/template" id="tpl-item">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="itemTitle panel-title">{{- itemNumber }}) {{- title }}</h3>
+				<h3 class="item-title panel-title">{{- title }}</h3>
+				{{- description }}
 			</div>
 			<div class="panel-body"> 
 				<a class="col-xs-12" href="{{- image_link }}">
-					<img class="block width100" src="{{- image_link }}" title="{{- title }}" />
+					<img class="block u-width-100" src="{{- image_link }}" title="{{- title }}" />
 				</a>
 			</div>
 		</div>
 	</script>
 
+
 	<script type="text/template" id="tpl-tab-wrapper">
 		<ul class="nav nav-tabs" role="tablist"></ul>
 		<div class="tab-content"></div>
 	</script>
+
 
 	<script type="text/template" id="tpl-tab-view">
 		<ul class="nav nav-tabs" role="tablist">
@@ -257,17 +181,44 @@
 			<li role="presentation">
 				<a href="#listing-preview" role="tab" data-toggle="tab">Preview</a>
 			</li>
-			<li role="presentation">
-				<a href="#listing-code" role="tab" data-toggle="tab">Code</a>
-			</li>
 		</ul>
 
 		<div class="tab-content">
 			<div id="listing-form" role="tabpanel" class="tab-pane active"></div>
 			<div id="listing-preview" role="tabpanel" class="tab-pane"></div>
-			<div id="listing-code" role="tabpanel" class="tab-pane"></div>
 		</div>
+	</script>
 
+
+	<script type="text/template" id="tpl-template">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<style>
+			.u-width-100 {
+				width: 100%;
+			}
+
+			.item {
+				padding-bottom: 25px;
+			}
+
+			.item-title {
+				height: 40px;
+			}
+
+			.section {
+				margin-bottom: 25px;
+			}
+
+			.bordered {
+				border: 1px solid #ccc;
+	  			padding: 10px 20px 10px 20px;
+	  			margin-bottom: 10px;
+			}
+		</style>
+
+	    <div class="container">
+	        <div class="js-content row"></div>
+	     </div>
 	</script>
 
 </body>

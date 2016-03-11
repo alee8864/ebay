@@ -9,7 +9,7 @@ define([
 
 		Views.ProductEditView = Marionette.ItemView.extend({
 			template: '#tpl-listting-form-product-create',
-			className: 'product',
+			className: 'product col-xs-12',
 			ui: {
 				'title': '#new-product-title',
 				'description': '#new-product-description',
@@ -120,7 +120,11 @@ define([
 			handleSubmit: function (evt) {
 				evt.preventDefault();
 
-				this.model.save();
+				this.model.save({
+					success: function (data) {
+						debugger;
+					}
+				});
 			}
 
 		});
