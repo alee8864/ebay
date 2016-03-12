@@ -26,32 +26,32 @@ app.get('/', function(req, res, next) {
 	res.render('index.ejs');
 });
 
-app.get('/listings', function (req, res, next) {
-	res.json({
-		itemName: "Marvel Run the Jewels Variant Pack",
-		description: "You are bidding on a 2 book tribute to Run the Jewels variant set by Marvel.  This set includes: ",
-		items: [
+app.get('/listings/:id', function (req, res) {
+	
+	Listing.findById(req.params.id, function (err, listing) {
+		res.json(listing);	
+	});
+});
+
+app.route('/listings')
+	.post(function (req, res, next) {
+		var listing = new Listing(req.body);
+		listing.save(function (err, saved) {
+			if (err) throw err;
+
+			res.json(saved);
+		});
+	})
+	.put(function (req, res, next) {
+		var listing = Listing.findByIdAndUpdate(req.body._id,
 			{
-				title: "Deadpool #45",
-				thumbnail: "https://dl.dropboxusercontent.com/u/37888108/books/20150518_210743.jpg",
-				imgLink: "https://dl.dropboxusercontent.com/u/37888108/books/20150518_210743.jpg"
-			}, {
-				title: "Howard the Duck #2",
-				thumbnail: "https://dl.dropboxusercontent.com/u/37888108/books/20150518_210801.jpg",
-				imgLink: "https://dl.dropboxusercontent.com/u/37888108/books/20150518_210801.jpg"
-			}
-		]
-	});
-});
+				$set: req.body
+			}, function (err, saved) {
+				if (err) throw err;
 
-app.post('/listings', function (req, res, next) {
-	var listing = new Listing(req.body);
-	listing.save(function (err, saved) {
-		if (err) throw err;
-
-		res.json(saved);
+				res.json(saved);
+		});
 	});
-});
 
 app.get('/all', function (req, res, next) {
 	Listing.find([], function (err, listings) {

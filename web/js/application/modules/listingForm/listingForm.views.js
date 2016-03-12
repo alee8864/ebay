@@ -120,9 +120,9 @@ define([
 			handleSubmit: function (evt) {
 				evt.preventDefault();
 
-				this.model.save({
-					success: function (data) {
-						debugger;
+				this.model.save(null, {
+					success: function (model, response, options) {
+						Backbone.history.navigate(model.id, {trigger: true});
 					}
 				});
 			}

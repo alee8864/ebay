@@ -6,7 +6,7 @@ define([
 
 		Main.Router = Marionette.AppRouter.extend({
 			appRoutes: {
-				'(listing)': 'show'
+				'(:listingId)': 'show'
 			}
 		});
 

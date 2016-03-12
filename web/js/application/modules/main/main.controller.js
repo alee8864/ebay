@@ -8,12 +8,11 @@ define([
 ], function (App, ListingModel, MainViews, ListingFormViews, PreviewController, PreviewViews) {
 	App.module('Main', function (Main, App, Backbone, Marionette, $, _) {
 		Main.Controller = Marionette.Controller.extend({
-			show: function (listing) {
+			show: function (listingId) {
 				var previewController = new PreviewController();
-				var listingModel = listing ? new ListingModel(listing) : new ListingModel();
+				var listingModel = listingId ? new ListingModel({'_id': listingId}) : new ListingModel();
 				var tabLayout = new MainViews.TabView();
 				var pageLayout = new MainViews.PageLayout();
-
 
 				tabLayout.on('show', function () {
 					
@@ -36,7 +35,17 @@ define([
 					tabLayout.listingPreviewRegion.show(listingContainer);
 				});
 
-				App.mainRegion.show(tabLayout);
+				if (listingModel.id) {
+					listingModel.fetch({
+						success: function (listing, data) {
+							App.mainRegion.show(tabLayout);
+						}
+					});	
+				} else {
+					App.mainRegion.show(tabLayout);
+				}
+
+				
 			}
 		});
 	});

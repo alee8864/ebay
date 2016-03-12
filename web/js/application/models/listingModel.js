@@ -3,13 +3,14 @@ define([
 	'models/productCollection'
 ], function (Backbone, ProductCollection) {
 	var ListingModel = Backbone.Model.extend({
-		url: 'listings',
+		urlRoot: 'listings',
+		idAttribute: '_id',
 		defaults: {
 			title: '',
 			description: '',
 			products: null
 		},
-		initialize: function () {
+		initialize: function (opts) {
 			this.set({
 				products: new ProductCollection()
 			});
@@ -17,7 +18,7 @@ define([
 		parse: function (obj) {
 			var attrs = obj;
 
-			attrs.products = new ProductCollection(obj.items)
+			attrs.products = new ProductCollection(obj.products);
 
 			return attrs;
 		}
