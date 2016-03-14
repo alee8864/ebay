@@ -27,7 +27,7 @@ body {
 	background-color: #f6f6fe;
 }
 
-.listing-form-empty {
+.add-product {
 	padding: 20px;
 	border: 1px solid #aaa;
 }
@@ -75,4 +75,14 @@ body {
 	position: fixed;
 	left: -100000px;
 	top: 0;
+}
+
+.add-product-btn {
+	padding-top: 16px;
+	padding-bottom: 16px;
+	border: 1px solid #aaa;
+	border-radius: 0;
+	background-color: #ded;
+
+	font-size: 16px;
 }

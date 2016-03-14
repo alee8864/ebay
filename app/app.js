@@ -6,11 +6,12 @@ var bodyParser = require('body-parser');
 var Listing = require('./models/Listing');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var config = require("config")
 
-mongoose.connect('mongodb://localhost/listingGenerator');
+mongoose.connect(config.get("mongo").url);
 
 mongoose.connection.on('connected', function () {  
-  console.log('Mongoose default connection open to mongodb://localhost/listingGenerator');
+  console.log('Mongoose default connection open to ', config.get("mongo").url);
 }); 
 
 

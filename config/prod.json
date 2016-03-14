@@ -1,0 +1,5 @@
+{
+	"mongo": {
+		"url": "mongodb://heroku_1c4zwwg8:21v43pmmv7aa9j9pjvllp3mv9k@ds011419.mlab.com:11419/heroku_1c4zwwg8"
+	}
+}

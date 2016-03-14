@@ -47,20 +47,12 @@ define([
 			template: '#tpl-listng-form-product-list-item'
 		});
 
-		Views.ProductListEmptyView = Marionette.ItemView.extend({
-			template: false,
-			className: 'listing-form-empty',
-			onRender: function () {
-				this.$el.text("Add a Product");
-			}
-		});
 
 		Views.ProductListView = Marionette.CompositeView.extend({
 			template: '#tpl-listing-form-product-list',
 			childView: Views.ProductView,
 			childViewContainer: '.js-products-container',
-			emptyView: Views.ProductListEmptyView,
-			className: 'col-xs-12',
+			className: 'col-sm-10 col-sm-offset-1',
 			ui: {
 				'addProduct': '.js-create-form-container'
 			},
