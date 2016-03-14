@@ -64,4 +64,4 @@ app.get('/all', function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, '../web')));
 
-app.listen(3000);
+app.listen(5000);
