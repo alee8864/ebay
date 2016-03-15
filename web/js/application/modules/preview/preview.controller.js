@@ -2,8 +2,8 @@ define([
 	'application',
 	'models/listingModel',
 	'modules/preview/preview.views',
-	"models/models"
-], function (App, ListingModel, ListingViews, models) {
+	"models/sectionModel"
+], function (App, ListingModel, ListingViews, SectionModel) {
 
 	App.module('Preview', function (Preview, App, Backbone, Marionette, $, _) {
 		Preview.Controller = Marionette.Controller.extend({
@@ -15,7 +15,7 @@ define([
 
 				layout.on('render', function () {
 					var headerView = new ListingViews.Section({
-						model: new models.SectionModel({
+						model: new SectionModel({
 							view: ListingViews.ListingHeader,
 							viewModel: listingModel
 						})
@@ -26,7 +26,7 @@ define([
 					});
 
 					var collectionView = new ListingViews.Section({
-						model: new models.SectionModel({
+						model: new SectionModel({
 							header: "Auctioned Items",
 							viewModel: itemSectionViewModel,
 							view: ListingViews.ItemCollection
@@ -34,14 +34,14 @@ define([
 					});
 
 					var shippingView = new ListingViews.Section({
-						model: new models.SectionModel({
+						model: new SectionModel({
 							header: "Shipping info",
 							view: ListingViews.ShippingView
 						})
 					});
 
 					var disclaimerView = new ListingViews.Section({
-						model: new models.SectionModel({
+						model: new SectionModel({
 							header: "Other Info",
 							view: ListingViews.DisclaimerView
 						})

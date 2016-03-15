@@ -3,9 +3,7 @@ define([
 	'backbone'
 ], function (Backbone) {
 
-	var models = {};
-
-	models.SectionModel = Backbone.Model.extend({
+	var SectionModel = Backbone.Model.extend({
 		defaults: {
 			header: "",
 			view: null,
@@ -14,5 +12,5 @@ define([
 	});
 
 
-	return models;
+	return SectionModel;
 });

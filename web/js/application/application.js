@@ -6,9 +6,9 @@ define(['marionette'], function (Marionette) {
 	});
 
 	Application.on("start", function() {
-	    if (Backbone.history) {
-	        Backbone.history.start();
-	    }
+		if (Backbone.history) {
+			Backbone.history.start();
+		}
 	});
 
 	return Application;
