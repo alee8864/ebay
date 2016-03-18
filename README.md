@@ -25,6 +25,12 @@ The uploaded files are dropped into the 'listing-generator' bucket
   export AWS_SECRET_KEY=your-aws-secret-key
   ```
 
+- install mongodb
+
+- create a folder for your mongodb and start the server
+ ```
+ mongod --dbpath folder-for-data
+ ```
 - start app
 
   ```npm start```
