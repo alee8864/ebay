@@ -10,7 +10,9 @@ require.config({
 		'application': 'application/application',
 		'modules': 'application/modules',
 		'templates': 'application/templates',
-		'models': 'application/models'
+		'models': 'application/models',
+		'fileupload': 'vendor/jquery.fileupload',
+		'jquery.ui.widget': 'vendor/jquery.ui.widget'
 	},
 	shim: {
 		underscore: {

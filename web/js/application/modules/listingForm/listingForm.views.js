@@ -1,7 +1,8 @@
 define([
 	'application',
 	'models/productModel',
-	'models/productCollection'
+	'models/productCollection',
+	'fileupload'
 ], function (App, ProductModel, ProductCollection) {
 
 	App.module('ListingForm', function (ListingForm, App, Backbone, Marionette, $, _) {
@@ -14,7 +15,8 @@ define([
 				'title': '#new-product-title',
 				'description': '#new-product-description',
 				'imageLink': '#new-product-image-link',
-				'image': '.js-product-image'
+				'image': '.js-product-image',
+				'upload': '.js-new-product-upload'
 			},
 			events: {
 				'change input': 'handleInputChange'
@@ -27,12 +29,36 @@ define([
 			},
 			initialize: function (options) {
 				this.index = options.index;
+				this.imageLoadErrorCount = 0;
+				_.bindAll(this, 'handleUploadCompleted', 'handleImageError');
 			},
 			onRender: function () {
 				this.$el.toggleClass('even', this.index % 2 === 0)
 				this.ui.image.toggle(this.model.get('image_link') !== '');
+
+				this.ui.upload.fileupload({
+					url: '/upload',
+					dataType: 'json',
+					done: this.handleUploadCompleted
+				});
+
+
+				this.ui.image[0].onerror = this.handleImageError;
 			},
-			handleInputChange: function () {
+			handleUploadCompleted: function (evt, data) {
+				var filename = data.files[0].name;
+				var bucketPath = 'https://s3-us-west-1.amazonaws.com/listing-generator/open/'
+
+				this.model.set({
+					image_link: bucketPath + filename
+				});
+			},
+			handleInputChange: function (evt) {
+				
+				if (this.ui.upload[0].files.length) {
+					this.uploadImage();
+				}
+
 				this.model.set({
 					title: this.ui.title.val(),
 					description: this.ui.description.val(),
@@ -40,6 +66,19 @@ define([
 				});
 
 				this.trigger('modelChange');
+			},
+			handleImageError: function () {
+				var that = this;
+				var src = this.ui.image.attr('src');
+				if (src && this.imageLoadErrorCount < 5) {
+					window.setTimeout(function () {
+						that.imageLoadErrorCount++;
+						that.render();
+					}, 1000);
+				} else if (this.imageLoadErrorCount >= 5) {
+					this.ui.image.attr('src', 'images/image-not-available.png');
+				}
+
 			}
 		});
 

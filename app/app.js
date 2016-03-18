@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var config = require("config");
 var defaultRoutes = require("./routes/default");
 var listingRoutes = require("./routes/listings");
+var uploadRoutes = require("./routes/upload");
 
 mongoose.connect(config.get("mongo").url);
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 defaultRoutes(app);
 listingRoutes(app);
+uploadRoutes(app);
 
 app.use(express.static(path.join(__dirname, '../web')));
 

@@ -9,11 +9,6 @@ body {
 	margin-top: 60px;
 }
 
-.bordered {
-	border: 1px solid #ccc;
-	padding: 10px 20px 10px 20px;
-	margin-bottom: 10px;
-}
 
 .tab-content {
 	background-color: #fff;
@@ -64,8 +59,20 @@ body {
 	border: 1px solid #aaa;
 }
 
+.new-product-upload-container {
+	position: relative;
+	display: inline-block;
+}
 
-
+.new-product-upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
 
 /**
  * Preview
@@ -97,5 +104,11 @@ body {
 
 .u-margin-t-20 {
 	margin-top: 20px;
+}
+
+.u-bordered {
+	border: 1px solid #ccc;
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 10px;
 }
 
