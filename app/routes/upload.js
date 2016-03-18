@@ -31,6 +31,7 @@ module.exports = function (app) {
 					return s3PutObject({
 						Key: 'open/' + fileInfo.name,
 						Body: img,
+						ContentType: 'image',
 						ACL: 'public-read'
 					});
 				})
@@ -46,6 +47,7 @@ module.exports = function (app) {
 					return s3PutObject({
 						Key: 'open/thumbs/' + fileInfo.name,
 						Body: img,
+						ContentType: 'image',
 						ACL: 'public-read'
 					});
 				})
