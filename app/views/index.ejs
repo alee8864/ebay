@@ -17,7 +17,7 @@
 
 	<script type="text/template" id="tpl-listting-form-product-create">
 		<div class="row u-pad-v-20">
-			<div class="col-sm-10">
+			<div class="col-sm-8 col-sm-offset-1">
 				<div class="form-group">
 					<label for="new-product-title" class="col-sm-3 control-label">Title</label>
 					<div class="col-sm-9">
@@ -29,6 +29,13 @@
 					<label for="new-product-description" class="col-sm-3 control-label">Description</label>
 					<div class="col-sm-9">
 						<input id="new-product-description" class="form-control" type="text" placeholder="Enter description" value={{-description}}>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="new-product-thumbnail-link" class="col-sm-3 control-label">Thumbnail Link</label>
+					<div class="col-sm-9">
+						<input id="new-product-thumbnail-link" class="js-thumbnail-link form-control" type="text" placeholder="Enter Image Link" value="{{-thumbnail_link}}">
 					</div>
 				</div>
 
@@ -50,7 +57,10 @@
 			</div>
 
 			<div class="col-sm-2">
-				<img class="js-product-image product-image" src="{{-image_link}}">
+				<img class="js-product-image product-image" src="{{-thumbnail_link}}">
+			</div>
+			<div class="col-sm-1">
+				<button type="button" class="close js-close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 		</div>
 	</script>
@@ -165,7 +175,7 @@
 			</div>
 			<div class="panel-body"> 
 				<a class="col-xs-12" href="{{- image_link }}">
-					<img class="block u-width-100" src="{{- image_link }}" title="{{- title }}" />
+					<img class="block u-width-100" src="{{- thumbnail_link }}" title="{{- title }}" />
 				</a>
 			</div>
 		</div>

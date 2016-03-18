@@ -54,7 +54,7 @@ define([
 
 		Views.Layout = Marionette.LayoutView.extend({
 			template: '#tpl-listing-layout',
-			className: 'row bordered',
+			className: 'row u-bordered',
 			regions: {
 				headerRegion: ".header-section-container",
 				descriptionRegion: ".item-description-section-container",

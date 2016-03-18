@@ -7,7 +7,8 @@ var Listing = new Schema({
 	products: [{
 		title: String,
 		description: String,
-		image_link: String
+		image_link: String,
+		thumbnail_link: String
 	}]
 });
 

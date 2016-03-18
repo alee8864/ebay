@@ -15,6 +15,7 @@ define([
 				'title': '#new-product-title',
 				'description': '#new-product-description',
 				'imageLink': '#new-product-image-link',
+				'thumbnailLink': '#new-product-thumbnail-link',
 				'image': '.js-product-image',
 				'upload': '.js-new-product-upload'
 			},
@@ -25,7 +26,7 @@ define([
 				'change': 'render'
 			},
 			triggers: {
-				'click .js-btn-add': 'add'
+				'click .js-close': 'remove'
 			},
 			initialize: function (options) {
 				this.index = options.index;
@@ -50,7 +51,8 @@ define([
 				var bucketPath = 'https://s3-us-west-1.amazonaws.com/listing-generator/open/'
 
 				this.model.set({
-					image_link: bucketPath + filename
+					image_link: bucketPath + filename,
+					thumbnail_link: bucketPath + 'thumbs/' + filename
 				});
 			},
 			handleInputChange: function (evt) {
@@ -62,6 +64,7 @@ define([
 				this.model.set({
 					title: this.ui.title.val(),
 					description: this.ui.description.val(),
+					thumbnail_link: this.ui.thumbnailLink.val(),
 					image_link: this.ui.imageLink.val()
 				});
 
@@ -82,16 +85,10 @@ define([
 			}
 		});
 
-		Views.ProductView = Marionette.ItemView.extend({
-			template: '#tpl-listng-form-product-list-item'
-		});
-
-
 		Views.ProductListView = Marionette.CompositeView.extend({
 			template: '#tpl-listing-form-product-list',
-			childView: Views.ProductView,
 			childViewContainer: '.js-products-container',
-			className: 'col-sm-10 col-sm-offset-1',
+			className: 'col-xs-12',
 			ui: {
 				'addProduct': '.js-create-form-container'
 			},
@@ -99,7 +96,8 @@ define([
 				'click .js-add-product': 'handleAddProductClick'
 			},
 			childEvents: {
-				'modelChange': 'childModelChange'
+				'modelChange': 'childModelChange',
+				'remove': 'handleRemoveChild'
 			},
 			childView: Views.ProductEditView,
 			childViewOptions: function(model, index) {
@@ -117,6 +115,9 @@ define([
 			},
 			childModelChange: function () {
 				this.model.trigger('change');
+			},
+			handleRemoveChild: function (childView) {
+				this.collection.remove(childView.model);
 			}
 		});
 

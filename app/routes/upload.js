@@ -14,8 +14,8 @@ module.exports = function (app) {
 		uploadUrl: '/uploads',
 		imageVersions: {
 			thumbnail: {
-				width: 200,
-				height: 200
+				width: 350,
+				height: 350
 			}
 		}
 	});
@@ -39,9 +39,8 @@ module.exports = function (app) {
 				})
 				.catch(function(err) {
 					console.log('error', err)
-				});	
-		
-		
+				});
+
 		var uploadThumbImage = fs.readFileAsync(thumbPath)
 				.then(function (img) {
 					return s3PutObject({
@@ -58,9 +57,6 @@ module.exports = function (app) {
 				});
 		
 		Promise.all([uploadFullImage, uploadThumbImage])
-			.then(function (files) {
-				console.log(files);
-			})
 			.catch(function (err) {
 				console.log('error', err);
 			})
