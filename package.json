@@ -26,8 +26,9 @@
     "express": "^4.13.4",
     "fs": "0.0.2",
     "jquery-file-upload-middleware": "^0.1.7",
-    "mongodb": "^2.1.7",
+    "mongodb": "^2.2.35",
     "mongoose": "^4.4.6",
+    "mongoskin": "^2.1.0",
     "monk": "^1.0.1"
   }
 }

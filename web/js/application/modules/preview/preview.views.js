@@ -15,13 +15,12 @@ define([
 			}
 		});
 
-
 		/**
 		*	View that shows the preview and handles the copy
 		**/
 		Views.TabView = Marionette.LayoutView.extend({
 			template: '#tpl-listing',
-			className: 'row u-pad-v-20',
+			className: 'u-pad-20',
 			events: {
 				'click .js-copy-button': 'handleCopyClick'
 			},
@@ -54,7 +53,7 @@ define([
 
 		Views.Layout = Marionette.LayoutView.extend({
 			template: '#tpl-listing-layout',
-			className: 'row u-bordered',
+			className: 'u-bordered content',
 			regions: {
 				headerRegion: ".header-section-container",
 				descriptionRegion: ".item-description-section-container",
@@ -83,7 +82,6 @@ define([
 
 		Views.ListingHeader = Marionette.ItemView.extend({
 			template: '#tpl-listing-header',
-			className: "row"
 		});
 
 		Views.Basic = Marionette.ItemView.extend({
@@ -101,7 +99,7 @@ define([
 
 		Views.Item =  Marionette.ItemView.extend({
 			template: '#tpl-item',
-			className: "col-xs-12 col-md-6 col-lg-3 item",
+			className: "card",
 			initialize: function (opts) {				
 				opts = opts || {};
 
@@ -113,6 +111,7 @@ define([
 
 		Views.ItemCollection = Marionette.CollectionView.extend({
 			childView: Views.Item,
+			className: "cards",
 			childViewOptions: function(model, index) {
 				return {
 					childIndex: index

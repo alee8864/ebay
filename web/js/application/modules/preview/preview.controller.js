@@ -22,12 +22,13 @@ define([
 					});
 
 					var itemSectionViewModel = new Backbone.Model({
-						collection: listingModel.get("products")
+						collection: listingModel.get("products"),
+						classes: "cards"
 					});
 
 					var collectionView = new ListingViews.Section({
 						model: new SectionModel({
-							header: "Auctioned Items",
+							header: "Included Item(s)",
 							viewModel: itemSectionViewModel,
 							view: ListingViews.ItemCollection
 						})
