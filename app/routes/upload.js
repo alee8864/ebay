@@ -2,6 +2,7 @@ var Promise = require('bluebird');
 var upload = require('jquery-file-upload-middleware');
 var path = require('path');
 var AWS = require('aws-sdk');
+var file = require('file-system');
 var fs = Promise.promisifyAll(require('fs'));
 
 module.exports = function (app) {
