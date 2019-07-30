@@ -36,7 +36,7 @@ module.exports = function (app) {
 					});
 				})
 				.then(function (s3result) {
-					return fs.unlinkSync(imagePath);
+					return fs.unlink(imagePath, function () { console.log("upload finished") });
 				})
 				.catch(function(err) {
 					console.log('error', err)
@@ -52,7 +52,7 @@ module.exports = function (app) {
 					});
 				})
 				.then(function (s3result) {
-					return fs.unlinkSync(thumbPath);
+					return fs.unlink(thumbPath, function () { console.log("upload finished") });
 				})
 				.catch(function(err) {
 					console.log('error', err)
