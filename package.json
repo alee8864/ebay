@@ -27,7 +27,7 @@
     "file-system": "^2.2.2",
     "jquery-file-upload-middleware": "0.1.8",
     "mongodb": "2.2.35",
-    "mongoose": "4.4.6",
+    "mongoose": "5.7.7",
     "mongoskin": "2.1.0",
     "monk": "1.0.1"
   }
